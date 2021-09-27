@@ -1,10 +1,20 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "./components/styles/Global";
+import Header from "./components/Header";
+
+const theme = {
+  colors: {
+    body: "#FFF",
+  },
+};
 
 function App() {
   return (
-    <div>
-      <h1>Stocks & Forex</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Header />
+    </ThemeProvider>
   );
 }
 
