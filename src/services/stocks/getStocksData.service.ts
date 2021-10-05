@@ -1,13 +1,14 @@
+import axios from "axios";
 import { StocksResponseType } from "types";
-import { stocksClient } from "../axiosInstance";
+import { getStocksEndpoint } from "../../config";
 
 const getStocksService = async (
   period: string,
   symbol: string
 ): Promise<any> => {
-  const client = stocksClient(period, symbol);
+  const stocksEndpoint = getStocksEndpoint(period, symbol);
   try {
-    const response = await client.get();
+    const response = await axios.get(stocksEndpoint);
     return response;
   } catch (error) {
     console.error();
