@@ -1,1 +1,1 @@
-export { getStocksService } from "./getStocksData.service";
+export { getStocksService } from './getStocksData.service';

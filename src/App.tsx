@@ -19,7 +19,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     getStocksService(state.period, state.symbol).then((res: any) =>
-      setData(res.data)
+      setData(res)
     );
   }, []);
   console.log(data);
