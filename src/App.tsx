@@ -3,7 +3,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./components/styles/Global";
 import Header from "./components/Header";
-import StocksChartScreen from "./views/StocksChartScreen";
+import Home from "./views/Home.view";
 import { getStocksService } from "./services/stocks";
 import { StocksResponseType } from "types";
 
@@ -20,8 +20,10 @@ const App: FC<StocksResponseType> = () => {
     period: "DAILY",
   });
 
+  const { symbol, period } = state;
+
   const fetchStockData = async () => {
-    const response = await getStocksService(state.period, state.symbol);
+    const response = await getStocksService(period, symbol);
     setData(response["Time Series (Daily)"]);
   };
 
@@ -36,7 +38,7 @@ const App: FC<StocksResponseType> = () => {
       <Router>
         <Switch>
           <Route path="/stocks" exact>
-            <StocksChartScreen stocksData={data} />
+            <Home data={data} symbol={symbol} />
           </Route>
         </Switch>
       </Router>

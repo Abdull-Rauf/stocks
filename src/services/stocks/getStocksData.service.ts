@@ -10,7 +10,6 @@ const getStocksService = async (
     const response = await axios.get(stocksEndpoint);
     return response.data;
   } catch (error) {
-    console.error();
     return {
       error,
     };

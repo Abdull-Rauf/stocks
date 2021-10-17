@@ -6,9 +6,7 @@ type StocksChartScreenType = {
   priceData?: any;
 };
 
-const StocksChart: FC<StocksChartScreenType> = ({
-  stocksData,
-}): JSX.Element => {
+const LineChart: FC<StocksChartScreenType> = ({ stocksData }): JSX.Element => {
   const canvas = document.createElement("canvas");
   const ctx: any = canvas.getContext("2d");
   ctx.fillRect(-20, 20, 150, 100);
@@ -30,15 +28,26 @@ const StocksChart: FC<StocksChartScreenType> = ({
       },
     ],
   };
-
   const options: any = {
-    title: {
-      display: true,
-      text: "Company",
+    plugins: {
+      title: {
+        display: true,
+        text: stocksData.symbol,
+      },
+      legend: {
+        labels: {
+          display: true,
+          label: "High",
+          boxHeight: "3",
+        },
+        display: true,
+        position: "right",
+        maxHeight: "3px",
+      },
     },
   };
 
   return <Line data={data} options={options} />;
 };
 
-export { StocksChart };
+export { LineChart };

@@ -1,15 +1,18 @@
 import { FC, useState, useEffect } from "react";
-import { StocksChart } from "../components/charts";
+import { LineChart } from "../components/charts";
+import StyledWrapper from "./styles/Wrapper.Styled";
 import moment from "moment";
-type StocksChartScreenProps = {
+type StocksChartProps = {
   stocksData?: any;
   priceData?: any;
+  symbol?: string;
 };
 
-const StocksChartScreen: FC<StocksChartScreenProps> = ({ stocksData }) => {
+const StocksChart: FC<StocksChartProps> = ({ stocksData, symbol }) => {
   const [state, setState] = useState<any>({
     labels: [],
     data: [],
+    symbol: symbol,
   });
 
   const formateData = (data: any) => {
@@ -21,14 +24,13 @@ const StocksChartScreen: FC<StocksChartScreenProps> = ({ stocksData }) => {
       };
     });
   };
-
   useEffect(() => {
-    const abc = formateData(stocksData).map((obj: any) => {
+    const formattedData = formateData(stocksData).map((obj: any) => {
       return obj;
     });
 
-    const labels = abc.map((obj: any) => obj.date);
-    const data = abc.map((obj: any) => obj.priceData["2. high"]);
+    const labels = formattedData.map((obj: any) => obj.date);
+    const data = formattedData.map((obj: any) => obj.priceData["2. high"]);
     state.data = data.slice(0, 10);
     state.labels = labels.slice(0, 10);
     setState({
@@ -36,15 +38,9 @@ const StocksChartScreen: FC<StocksChartScreenProps> = ({ stocksData }) => {
     });
   }, [stocksData]);
   return (
-    <div
-      style={{
-        width: "70vw",
-        margin: "auto",
-      }}
-    >
-      <StocksChart stocksData={state} />
-    </div>
+    <StyledWrapper>
+      <LineChart stocksData={state} />
+    </StyledWrapper>
   );
 };
-
-export default StocksChartScreen;
+export default StocksChart;
