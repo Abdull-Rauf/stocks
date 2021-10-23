@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { LineChart } from "../components/charts";
+import DateRange from "../components/DateRange";
 import StyledWrapper from "./styles/Wrapper.Styled";
 import moment from "moment";
 type StocksChartProps = {
@@ -13,6 +14,7 @@ const StocksChart: FC<StocksChartProps> = ({ stocksData, symbol }) => {
     labels: [],
     data: [],
     symbol: symbol,
+    dateRange: 7,
   });
 
   const formateData = (data: any) => {
@@ -31,14 +33,19 @@ const StocksChart: FC<StocksChartProps> = ({ stocksData, symbol }) => {
 
     const labels = formattedData.map((obj: any) => obj.date);
     const data = formattedData.map((obj: any) => obj.priceData["2. high"]);
-    state.data = data.slice(0, 10);
-    state.labels = labels.slice(0, 10);
+    state.data = data.slice(0, state.dateRange);
+    state.labels = labels.slice(0, state.dateRange);
     setState({
       ...state,
     });
-  }, [stocksData]);
+  }, [stocksData, state.dateRange]);
+
+  const handleClick = (value: number) => {
+    setState({ ...state, dateRange: value });
+  };
   return (
     <StyledWrapper>
+      <DateRange handleClick={handleClick} />
       <LineChart stocksData={state} />
     </StyledWrapper>
   );
