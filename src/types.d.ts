@@ -4,7 +4,7 @@ declare module "types" {
   };
   export type StocksResponseType = {
     [key: string]: {
-      [key: string]: any;
+      [key: string]: string;
     };
     priceData?: any;
   };
