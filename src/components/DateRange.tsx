@@ -1,14 +1,9 @@
+import { FC } from "react";
 import Button from "./styles/Button.styled";
 import Container from "./styles/Container.styled";
-
-const DateRange = ({ handleClick }: any) => {
-  const dateRangeData: any = [
-    { label: "7D", value: 7 },
-    { label: "1M", value: 30 },
-    { label: "6M", value: 180 },
-    { label: "1Y", value: 365 },
-  ];
-
+import { dateRangeData } from "../config/config";
+import { HandleClickType } from "types";
+const DateRange: FC<HandleClickType> = ({ handleClick }) => {
   return (
     <Container>
       {dateRangeData.map((range: any, i: number) => {

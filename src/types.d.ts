@@ -4,8 +4,17 @@ declare module "types" {
   };
   export type StocksResponseType = {
     [key: string]: {
-      [key: string]: string;
+      [key: string]: any;
     };
     priceData?: any;
+  };
+  export type PriceDataType = {
+    [key: string]: string;
+  };
+  export type DataType = {
+    [key: string]: PriceDataType;
+  };
+  export type HandleClickType = {
+    handleClick: (arg) => void;
   };
 }
