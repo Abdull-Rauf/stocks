@@ -17,4 +17,8 @@ declare module "types" {
   export type HandleClickType = {
     handleClick: (arg) => void;
   };
+  export type DateRangeType = {
+    label: string;
+    value: number;
+  };
 }

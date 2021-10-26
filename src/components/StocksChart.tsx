@@ -11,8 +11,15 @@ type StocksChartProps = {
   symbol?: string;
 };
 
+interface StateType {
+  labels: string[];
+  data: string[];
+  symbol?: string;
+  dateRange: number;
+}
+
 const StocksChart: FC<StocksChartProps> = ({ stocksData, symbol }) => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<StateType>({
     labels: [],
     data: [],
     symbol: symbol,
@@ -20,7 +27,6 @@ const StocksChart: FC<StocksChartProps> = ({ stocksData, symbol }) => {
   });
 
   const formateData = (data: DataType) => {
-    console.log(data);
     return Object.entries(data).map(([key, value], index) => {
       return {
         date: moment(data[key]).format("D MMM"),
