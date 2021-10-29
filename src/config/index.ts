@@ -1,1 +1,1 @@
-export { getStocksEndpoint } from "./config";
+export { dateRangeData } from "../config/config";
